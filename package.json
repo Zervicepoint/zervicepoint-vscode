@@ -3,7 +3,7 @@
     "displayName": "Zervicepoint Snippets",
     "description": "Zervicepoint Snippets for activites and data sources.",
     "publisher": "zervicepoint",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "icon": "media/zp_logo_icon.png",
     "homepage": "https://github.com/zervicepoint/zervicepoint-vscode/README.md",
     "repository": {

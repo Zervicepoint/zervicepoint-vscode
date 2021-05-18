@@ -4,22 +4,19 @@ This extension includes useful powershell snippets for building zervicepoint plu
 
 ## Features
 
-Zervicepoint snippets for creating:
+Zervicepoint snippets for creating powershell functions and modules to create the following objects in Zervicepoint:
 
 * Activities
 * DropDown Data Source
 * WebService Data Source
 * Table Data Source
-* Providers.xml
-* Other
+* Activity/Data source configuration files (providers.xml)
 
 ## Requirements
 
-Some snippets includes PowerShell Cmdlets that you may require. Such as PowerFrame.
+Some snippets includes PowerShell Cmdlets that you may require. Such as PowerFrame, PowerFrame is included by default in any Zervicepoint plugin.
 
 ## Known Issues
-
-Missing dotnet examples
 
 ## Release Notes
 
