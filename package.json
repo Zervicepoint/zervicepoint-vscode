@@ -1,0 +1,31 @@
+{
+    "name": "zervicepoint-vscode",
+    "displayName": "Zervicepoint Snippets",
+    "description": "Zervicepoint Snippets for activites and data sources.",
+    "publisher": "zervicepoint",
+    "version": "0.0.1",
+    "icon": "media/zp_logo_icon.png",
+    "homepage": "https://github.com/zervicepoint/zervicepoint-vscode/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zervicepoint/zervicepoint-vscode"
+    },
+    "galleryBanner": {
+        "color": "#ECF1F1",
+        "theme": "light"
+    },
+    "engines": {
+        "vscode": "^1.56.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+            {
+                "language": "powershell",
+                "path": "./snippets/snippets.code-snippets"
+            }
+        ]
+    }
+}
