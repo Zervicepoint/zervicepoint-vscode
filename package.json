@@ -3,12 +3,12 @@
     "displayName": "Zervicepoint Snippets",
     "description": "Zervicepoint Snippets for activites and data sources.",
     "publisher": "zervicepoint",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "icon": "media/zp_logo_icon.png",
     "homepage": "https://github.com/zervicepoint/zervicepoint-vscode/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/zervicepoint/zervicepoint-vscode"
+        "url": "https://github.com/zervicepoint/zervicepoint-vscode.git"
     },
     "galleryBanner": {
         "color": "#ECF1F1",
