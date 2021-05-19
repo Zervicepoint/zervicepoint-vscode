@@ -2,6 +2,21 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2021-05-19
+
+### Added
+
+- Additional manifests example for table, webservice
+- Get-PFAdditionalParameter example
+- $config and $parameters param
+- try / catch block with Write-PFError
+- dropdown output snippet
+- $config currentuser example
+
+### Changed
+
+- Modified table snippet
+
 ## [0.0.3] - 2021-05-18
 
 ### Changed

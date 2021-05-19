@@ -40,6 +40,31 @@
 			"}"
 		]
     },
+	"dropdown-currentuser": {
+        "scope": "powershell",
+        "prefix": ["zp dropdown currentuser"],
+        "description": "Retrieve ADUser based on currently logged on user. (For data sources)",
+        "body": [
+			"\\$currentUser = Get-PFADUser -DomainController \\$config.DomainController -LdapFilter \"(&(objectCategory=person)(objectClass=user)(mail=\\$(\\$config.currentuser)))\" -Property \\$properties -PageSize 1"
+		]
+    },
+	"dropdown-output": {
+		"scope": "powershell",
+		"prefix": ["zp dropdown output","output dropdown"],
+		"description": "Select property from object and transform property name to Id,Name",
+		"body": [			
+			"\\$psobject | Select-Object @{",
+			"    Name=\"Id\";",
+			"    Expression = {",
+			"        \\$_.Identifier",
+			"    }}dropd,",
+			"    @{",
+			"    Name=\"Name\";",
+			"    Expression = {",
+			"        \\$_.DisplayName",
+			"    }}",
+		]
+	},
 	"create dropdown role": {
 		"scope": "powershell",
 		"prefix": "zp dropdown role",
@@ -408,24 +433,68 @@
 			"}"
 		]
 	},
+	"Create webservice manifest": {
+		"scope": "powershell",
+		"prefix": "zp manifest webservice",
+		"body": [
+			"@{",
+			"    RootModule = '$TM_FILENAME_BASE.psm1'",
+			"    ModuleVersion = '1.0.0'",
+			"    GUID = '$UUID'",
+			"    Author = '${2:Author}'",
+			"    CompanyName = '${3:Example}'",
+			"    Copyright = '${4:(c) $CURRENT_YEAR $3. All rights reserved}'",
+			"    Description = '${5:Displays objects from system.}'",
+			"    PowerShellVersion = '3.0'",
+			"    FunctionsToExport = '*'",
+			"    FileList = @(",
+			"        '$TM_FILENAME_BASE.psd1',",
+			"        '$TM_FILENAME_BASE.psm1'",
+			"    )",
+			"",
+			"}"
+		]
+	},
 	"table": {
 		"scope": "powershell",
 		"prefix": "zp table",
 		"description": "Create table data source",
 		"body": [
-			"function Get-ZPTable",
+			"function Get-ZPTableDemo",
 			"{",
 			"    param (",
 			"        [parameter(Mandatory = \\$false, ParameterSetName = \"Hidden\")]",
 			"        [hashtable]\\$config",
 			"    )",
 			"    $0",
-			"    \\$data = Get-Service",
+			"    \\$data = Get-Alias",
 			"    if(\\$data) {",
-			"        \\$output = \\$data | Select-Object -Property Name,@{Name=\"Description\";Expression={\\$_.DisplayName}},Status,StartType ",
+			"        \\$output = \\$data | Select-Object -Property @{Name=\"Alias\";Expression={\\$_.Name}},@{Name=\"Description\";Expression={\\$_.DisplayName}},Definition",
 			"    }",
 			"",
 			"    return \\$output",
+			"",
+			"}"
+		]
+	},
+	"Create table manifest": {
+		"scope": "powershell",
+		"prefix": "zp manifest table",
+		"body": [
+			"@{",
+			"    RootModule = '$TM_FILENAME_BASE.psm1'",
+			"    ModuleVersion = '1.0.0'",
+			"    GUID = '$UUID'",
+			"    Author = '${2:Author}'",
+			"    CompanyName = '${3:Example}'",
+			"    Copyright = '${4:(c) $CURRENT_YEAR $3. All rights reserved}'",
+			"    Description = '${5:Displays objects from system.}'",
+			"    PowerShellVersion = '3.0'",
+			"    FunctionsToExport = '*'",
+			"    FileList = @(",
+			"        '$TM_FILENAME_BASE.psd1',",
+			"        '$TM_FILENAME_BASE.psm1'",
+			"    )",
 			"",
 			"}"
 		]
@@ -440,7 +509,7 @@
 	},
 	"Get-PFCredential": {
 		"scope": "powershell",
-		"prefix": "Get-PFCredential",
+		"prefix": "zp Get-PFCredential",
 		"description": "Get-PFCredential from $Config",
 		"body": [
 			"if ([string]\\$config.Credential) {",
@@ -451,5 +520,63 @@
 			"    $0# do something",
 			"}"
 		]		
+	},
+	"Get-PFAdditionalParameter": {
+		"scope": "powershell",
+		"prefix": "zp Get-PFAdditionalParameter",
+		"description": "Create hashtable that only include any additional parameters added",
+		"body":[
+			"# \\$Parameters required in param block",
+			"\\$additionalParameters = Get-PFAdditionalParameters -Parameters \\$Parameters"
+		]
+	},
+	"Get-PFAdditionalParameter-example": {
+		"scope": "powershell",
+		"prefix": "zp Get-PFAdditionalParameter example",
+		"description": "Create hashtable that only include any additional parameters added",
+		"body":[
+			"# \\$Parameters required in param block",
+			"\\$additionalParameters = Get-PFAdditionalParameters -Parameters \\$Parameters",
+			"",			
+			"if (-not \\$additionalParameters) {",
+			"    return @{",
+			"        ZPActivityStatus = \"You did not add any additional parameters\"",
+			"    }",
+			"}",
+			"# Example - Pass additional parameters via splatting to another function.",
+			"Set-ADUser -Identity \\$Identity @additionalParameters",
+			""
+		]
+	},
+	"try catch Write-PFError": {
+		"scope": "powershell",
+		"prefix": ["zp try","zp Write-PFError"],
+		"description": "try catch with Write-PFError",
+		"body": [
+			"try {",
+			"    \\$adUser = New-ADUser -Name \"\" -ErrorAction Stop",
+			"}",
+			"catch {",
+			"    Write-PFError -Message \"Failed to create user\" -Exception \\$_ -Config \\$Config -Parameters \\$Parameters",
+			"}"
+		]
+	},
+	"config": {
+		"scope": "powershell",
+		"prefix": ["zp config parameter"],
+		"description": "parameter for $config",
+		"body": [
+			"[parameter(Mandatory = \\$false, ParameterSetName = \"Hidden\")]",
+			"[hashtable]\\$Config"
+		]
+	},
+	"parameters": {
+		"scope": "powershell",
+		"prefix": ["zp parameters"],
+		"description": "parameter for $parameters",
+		"body": [
+			"[parameter(Mandatory = \\$false, ParameterSetName = \"Hidden\")]",
+			"[hashtable]\\$Parameters"
+		]
 	}
 }
