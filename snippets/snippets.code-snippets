@@ -527,7 +527,7 @@
 		"description": "Create hashtable that only include any additional parameters added",
 		"body":[
 			"# \\$Parameters required in param block",
-			"\\$additionalParameters = Get-PFAdditionalParameters -Parameters \\$Parameters"
+			"\\$additionalParameters = Get-PFAdditionalParameter -Parameters \\$Parameters"
 		]
 	},
 	"Get-PFAdditionalParameter-example": {
@@ -536,7 +536,7 @@
 		"description": "Create hashtable that only include any additional parameters added",
 		"body":[
 			"# \\$Parameters required in param block",
-			"\\$additionalParameters = Get-PFAdditionalParameters -Parameters \\$Parameters",
+			"\\$additionalParameters = Get-PFAdditionalParameter -Parameters \\$Parameters",
 			"",			
 			"if (-not \\$additionalParameters) {",
 			"    return @{",

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.0.5] - 2021-05-22
+
+### Changed
+
+- Fixed incorrect cmdletname in Get-PFAdditionalParameter example
+
 ## [0.0.4] - 2021-05-19
 
 ### Added
